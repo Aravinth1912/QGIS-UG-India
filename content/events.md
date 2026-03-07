@@ -19,12 +19,24 @@ Stay updated with our upcoming meetups, workshops, and conferences. Join us to l
 
 ### Indian Women in GIS – Women’s Day Event
 
-When: 8 March, 2026  
+When: 8 March, 2026, 6-7 pm IST 
 Where: Online  
 
 Join us in celebrating International Women’s Day with a special Indian Women in GIS event. This event highlights the contributions of women in geospatial technologies and provides a platform for knowledge sharing and collaboration.
 
-{{< button class = "is-primary1" link = "https://forms.gle/mvnWkN8QKcrAJ8L76" text = "Registration Form" >}}
+Agenda
+- Welcome Message - Chancy Shah [5 mins]
+- Responses from Participant Survey - Kiran Bhamblani [5 mins]
+- Presentations
+  - Git: The Cornerstone of QGIS Documentation – Sutapa Bhattacharya [10 mins]
+  - GIS for Archaeology and Urban Planning – Sonia Das [10 mins]
+  - Story Telling with QGIS – Jyoti [10 mins]
+  - Multispectral and Hyperspectral Remote Sensing Techniques – Smriti Sahoo [10 mins]
+- Community Engagement - Women’s Day Game [10 mins]
+
+Everyone is welcome to attend and join the session. The session will be hosted on Zoom. You will find the meeting details below.
+
+{{< button class = "is-primary1" link = "https://us02web.zoom.us/meetings/87880936210/invitations?signature=lVWOFSyVmM6_3jJClCAwc3fH99IOMdRPh0bMmNwAvXU" text = "Joining Information" >}}
 
 {{< rich-content-end >}}
 {{< rich-right-start >}}
