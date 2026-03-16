@@ -106,7 +106,7 @@ Click on **Apply** and then **OK**.
 You can add any number of rules from the Shortbread Vector Tile schema and style them as needed. In order to style the Roads rule, double-click on the line symbol (second column) to open the styling window. Here, the line width is increased and the colour is changed to black. Click on **Apply** and **OK**.
 
 <p align="center">
-  <img src="./img/image09.webp" alt="Line symbol styling dialog with increased width and black colour for roads" style="max-width: 80%;">
+  <img src="./img/image09.webp" alt="Line symbol styling dialog with increased width and black colour for roads" style="max-width: 60%;">
 </p>
 
 If you are new to styling or need help, refer to the [Styling Tutorial](https://www.qgistutorials.com/en/docs/3/basic_vector_styling.html). You can also import from an already saved style using the **Load Style** option from the **Style** menu at the bottom. You can also toggle each rule's visibility by checking and unchecking the boxes associated with it.
