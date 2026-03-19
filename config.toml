@@ -111,7 +111,7 @@ cookiesstate = false
 
 # Matomo
 matomoURL = "//matomo.qgis.org/"
-matomoSiteId = '7'
+matomoSiteId = '8'
 
 # commit hash file
 commitFile = "config/commit.toml"
