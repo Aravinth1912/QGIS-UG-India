@@ -14,35 +14,36 @@ Stay updated with our upcoming meetups, workshops, and conferences. Join us to l
 
 ## Upcoming Events
 
-{{< rich-box-start layoutClass="has-right rounded" >}}
+{{< rich-box-start icon="📥" layoutClass="tips">}}
 {{< rich-content-start themeClass="coloring-2" >}}
 
-### QGIS India Community Day (March 2026)
+No upcoming events at the moment.
 
-When: Friday 20 March 2026, 7-8pm IST &nbsp;<i class="fas fa-calendar-plus"></i> [Add to Google Calendar](https://calendar.google.com/calendar/event?action=TEMPLATE&tmeid=NDlobnVqdm8yZXMyaDRqYnVzbDJmNGhxdXUgY18wNmY3NDZkYmE5ZWEwNDE0OWRmNGFkY2UzOTFmMjZjN2E2ZmVmZGU2ODk0OGFjMThhZDcyNzEwZGM1ODk3YWEwQGc&tmsrc=c_06f746dba9ea04149df4adce391f26c7a6fefde68948ac18ad72710dc5897aa0%40group.calendar.google.com)
-
-Where: Online
-
-Join us for the QGIS India Community Day! A community gathering with updates, featured presentations, and open discussions.
-
-**Agenda**
-
-**Welcome and Updates from the Community**
-- QGIS 4 release
-- New Plugins from Indian Developers
-- Updates from the QGIS India User Group
-
-**Featured Presentations**
-- Tutorial: Design Custom Maps in QGIS with OSM Vector Tiles – Ark Arjun [20 mins]
-- Tutorial: Sorting Layers Alphabetically in QGIS Using PyQGIS – Sudarshan Bhoyar [10 mins]
-
-{{< button class = "is-primary1" link = "https://us02web.zoom.us/meetings/89086905274/invitations?signature=qrvFCuaqpUGeg5vobEu7blGc-VFG94XG3eaYVx57syU" text = "Join on Zoom" >}}
-
+[Join the community]({{< relref "/" >}}#join-us) to get announcements for new events.
 
 {{< rich-content-end >}}
 {{< rich-box-end >}}
 
 ## Past Events
+
+{{< rich-box-start layoutClass="has-right rounded" >}}
+{{< rich-content-start themeClass="coloring-1" >}}
+
+### QGIS India Community Day (March 2026)
+
+When: 20 March 2026, 7-8pm IST
+
+Where: Online
+
+The QGIS India User Group held its first monthly community meeting, featuring updates on QGIS 4.0 release and tutorials on custom map design using OSM vector tiles and layer sorting with Python. We discussed the status of our efforts to translate QField across 22 Indian languages, and proposal for establishing student chapters to help with localization efforts.
+
+{{< button class = "is-primary1" link = "https://www.youtube.com/watch?v=eoTDM-PNmXY" text = "Watch Recording" >}}
+
+{{< rich-content-end >}}
+{{< rich-right-start >}}
+![](/img/community-day-march-2026.webp)
+{{< rich-right-end >}}
+{{< rich-box-end >}}
 
 {{< rich-box-start layoutClass="has-right rounded" >}}
 {{< rich-content-start themeClass="coloring-1" >}}
