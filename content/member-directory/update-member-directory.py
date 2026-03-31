@@ -33,44 +33,47 @@ FORM_URL = "https://forms.gle/Y738efwadTUFggpg8"
 # Raw HTML injected before the markdown table — uses Bulma classes already
 # loaded by the theme, so no extra CSS is needed.
 CONTROLS_HTML = """\
-<div id="member-dir-controls" class="mb-4">
-  <div class="columns is-multiline is-vcentered">
-    <div class="column is-12-mobile is-5-tablet is-5-desktop">
-      <div class="field">
-        <label class="label is-small" for="md-search">Search</label>
-        <div class="control has-icons-left">
-          <input id="md-search" class="input is-small" type="search"
-                 placeholder="Search by name or organisation…" autocomplete="off">
-          <span class="icon is-left is-small"><i class="fas fa-search"></i></span>
-        </div>
+<style>
+  .md-ctrl-row { display:flex; flex-wrap:wrap; gap:0.75rem; align-items:flex-end; }
+  .md-ctrl-search { flex:2 1 200px; min-width:0; }
+  .md-ctrl-filter { flex:1 1 140px; min-width:0; }
+  .md-ctrl-reset  { flex:0 0 auto; padding-top:1.5rem; }
+  .md-ctrl-search .input,
+  .md-ctrl-filter select { width:100%; box-sizing:border-box; }
+  @media (max-width: 768px) {
+    .md-ctrl-search,
+    .md-ctrl-filter { flex:0 0 100%; }
+    .md-ctrl-reset { padding-top:0; }
+  }
+</style>
+<div id="member-dir-controls" style="margin-bottom:1rem">
+  <div class="md-ctrl-row">
+    <div class="md-ctrl-search">
+      <label class="label is-small" for="md-search">Search</label>
+      <div class="control has-icons-left">
+        <input id="md-search" class="input is-small" type="search"
+               placeholder="Search by name or organisation…" autocomplete="off">
+        <span class="icon is-left is-small"><i class="fas fa-search"></i></span>
       </div>
     </div>
-    <div class="column is-6-mobile is-3-tablet is-3-desktop">
-      <div class="field">
-        <label class="label is-small" for="md-city">City / Town</label>
-        <div class="control">
-          <div class="select is-small is-fullwidth">
-            <select id="md-city"><option value="">All cities</option></select>
-          </div>
-        </div>
-      </div>
+    <div class="md-ctrl-filter">
+      <label class="label is-small" for="md-city">City / Town</label>
+      <select id="md-city" class="input is-small" style="cursor:pointer">
+        <option value="">All cities</option>
+      </select>
     </div>
-    <div class="column is-6-mobile is-3-tablet is-3-desktop">
-      <div class="field">
-        <label class="label is-small" for="md-state">State</label>
-        <div class="control">
-          <div class="select is-small is-fullwidth">
-            <select id="md-state"><option value="">All states</option></select>
-          </div>
-        </div>
-      </div>
+    <div class="md-ctrl-filter">
+      <label class="label is-small" for="md-state">State</label>
+      <select id="md-state" class="input is-small" style="cursor:pointer">
+        <option value="">All states</option>
+      </select>
     </div>
-    <div class="column is-6-mobile is-1-tablet is-1-desktop" style="padding-top:1.75rem">
-      <button id="md-reset" class="button is-small is-light is-fullwidth"
-              type="button" title="Clear filters">Reset</button>
+    <div class="md-ctrl-reset">
+      <button id="md-reset" class="button is-small is-light" type="button"
+              title="Clear filters">Reset</button>
     </div>
   </div>
-  <p id="md-count" class="is-size-7 has-text-grey"></p>
+  <p id="md-count" class="is-size-7 has-text-grey" style="margin-top:0.5rem"></p>
 </div>
 """
 
@@ -82,14 +85,10 @@ FILTER_SCRIPT = """\
   var controls = document.getElementById('member-dir-controls');
   if (!controls) return;
 
-  // The only table on the page is the member table
-  var table = document.querySelector('table');
-  if (!table) return;
-
-  var tbody = table.querySelector('tbody');
+  var tbody = document.getElementById('member-tbody');
   if (!tbody) return;
 
-  var rows     = Array.from(tbody.querySelectorAll('tr'));
+  var rows = Array.from(tbody.querySelectorAll('tr'));
   var searchEl = document.getElementById('md-search');
   var cityEl   = document.getElementById('md-city');
   var stateEl  = document.getElementById('md-state');
@@ -170,19 +169,38 @@ def load_members(csv_path: Path) -> list[dict]:
     return members
 
 
+def esc(text: str) -> str:
+    """Minimal HTML escaping for table cell content."""
+    return text.replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;")
+
+
 def build_table(members: list[dict]) -> str:
-    lines = [
-        "| # | Name | City / Town | State | Organisation |",
-        "|---|------|-------------|-------|--------------|",
-    ]
+    rows = []
     for i, m in enumerate(members, start=1):
-        org = m["org"] if m["org"] else "—"
-        org = org.replace("|", "\\|")
-        name = m["name"].replace("|", "\\|")
-        city = m["city"].replace("|", "\\|")
-        state = m["state"].replace("|", "\\|")
-        lines.append(f"| {i} | {name} | {city} | {state} | {org} |")
-    return "\n".join(lines)
+        org = esc(m["org"]) if m["org"] else "<span style='color:#aaa'>—</span>"
+        rows.append(
+            f"  <tr>"
+            f"<td>{i}</td>"
+            f"<td><strong>{esc(m['name'])}</strong></td>"
+            f"<td>{esc(m['city'])}</td>"
+            f"<td>{esc(m['state'])}</td>"
+            f"<td>{org}</td>"
+            f"</tr>"
+        )
+    return (
+        '<div class="table-container">\n'
+        '<table class="table is-striped is-hoverable is-fullwidth is-narrow">\n'
+        "  <thead><tr>"
+        "<th>#</th>"
+        "<th>Name</th>"
+        "<th>City / Town</th>"
+        "<th>State</th>"
+        "<th>Organisation</th>"
+        "</tr></thead>\n"
+        "  <tbody id='member-tbody'>\n"
+        + "\n".join(rows)
+        + "\n  </tbody>\n</table>\n</div>"
+    )
 
 
 def main():
@@ -208,18 +226,9 @@ Want to be listed here, or update your entry? Fill in the [member registration f
 
 > **Last updated:** {today}  |  **Total members listed:** {len(members)}
 
-{{{{< columns-start >}}}}
-{{{{< column-start class="is-flex-direction-column is-full">}}}}
-{{{{< rich-box-start >}}}}
-{{{{< rich-content-start themeClass="coloring-1" >}}}}
-
 {CONTROLS_HTML}
-{build_table(members)}
 
-{{{{< rich-content-end >}}}}
-{{{{< rich-box-end >}}}}
-{{{{< column-end >}}}}
-{{{{< columns-end >}}}}
+{build_table(members)}
 
 {FILTER_SCRIPT}
 
