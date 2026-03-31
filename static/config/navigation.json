@@ -64,6 +64,13 @@
           {
             "type": "second-menu",
             "settings": {
+              "name": "Member Directory",
+              "href": "/member-directory/"
+            }
+          },
+          {
+            "type": "second-menu",
+            "settings": {
               "name": "Rules",
               "href": "/rules/"
             }
